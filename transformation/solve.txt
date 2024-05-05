@@ -1,0 +1,7 @@
+Here we have a encoded format flag.. we need to decode it..
+
+we can use the cyberchef and use the magic filter. and we will get the result..
+
+or we can use below code:
+>>> print(flag.encode("utf-16-be"))
+b'picoCTF{16_bits_inst34d_of_8_26684c20}'
