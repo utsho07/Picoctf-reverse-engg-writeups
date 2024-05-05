@@ -1,0 +1,43 @@
+In the code there is a portion where key is matching with the some encrypted format of data..
+t is a long program. We can see three line:
+
+```python
+key_part_static1_trial = "picoCTF{1n_7h3_|<3y_of_"
+key_part_dynamic1_trial = "xxxxxxxx"
+key_part_static2_trial = "}"
+```
+
+so we can understand the flag will be: picoCTF{1n_7h3_|<3y_of_xxxxxxxx}
+
+So we need to find the 8x here.
+
+In the code we can see there is a portion:
+
+if key[i] != hashlib.sha256(username_trial).hexdigest()[4]:
+            return False
+        else:
+            i += 1
+
+        if key[i] != hashlib.sha256(username_trial).hexdigest()[5]:
+            return False
+        else:
+            i += 1
+
+
+
+so we can solve this problem using below code:
+`import hashlib`
+`username_trial = "GOUGH"`
+`#nitialize an empty string for the key`
+`key = ""`
+key += hashlib.sha256(username_trial.encode()).hexdigest()[4]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[5]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[3]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[6]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[2]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[7]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[1]
+key += hashlib.sha256(username_trial.encode()).hexdigest()[8]
+print(key)
+
+flag: picoCTF{1n_7h3_|<3y_of_f911a486}
